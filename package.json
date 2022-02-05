@@ -6,10 +6,15 @@
   "scripts": {
     "build": "tsc --build",
     "lint": "eslint src/**/*.ts",
-    "format": "eslint src/**/*.ts --fix",
+    "format": "prettier --write src/**/*.ts",
     "dev": "cross-env NODE_ENV=development tsnd --respawn --transpile-only ./src/main.ts",
     "staging": "cross-env NODE_ENV=staging node ./dist/main.js",
     "start": "cross-env NODE_ENV=production node ./dist/main.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn format && yarn lint"
+    }
   },
   "repository": {
     "type": "git",
@@ -21,11 +26,6 @@
     "url": "https://github.com/SILVAWesley/pocket-chat-server/issues"
   },
   "homepage": "https://github.com/SILVAWesley/pocket-chat-server#readme",
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint"
-    }
-  },
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/node": "^17.0.10",
